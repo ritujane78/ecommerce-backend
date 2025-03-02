@@ -9,9 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(value = {"_links"})
 @Entity
 @Table(name="product")
 @Getter
@@ -23,7 +21,7 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
 
@@ -55,4 +53,17 @@ public class Product {
     @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdated;
+
+    public Long getId() { return id; }
+    public String getSku() { return sku; }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public BigDecimal getUnitPrice() { return unitPrice; }
+    public String getImageUrl() { return imageUrl; }
+    public boolean isActive() { return active; }
+    public int getUnitsInStock() { return unitsInStock; }
+    public Date getDateCreated() { return dateCreated; }
+    public Date getLastUpdated() { return lastUpdated; }
+    public ProductCategory getCategory() { return category; }
+
 }
