@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -20,6 +21,10 @@ import java.util.Set;
 
 @Configuration
 public class MyDateRestConfig implements RepositoryRestConfigurer {
+
+        @Value("${allowed.origins}")
+        private String allowedOrigins;
+
         private EntityManager entityManager;
         @Autowired
         public MyDateRestConfig(EntityManager theEntityManager){
@@ -41,7 +46,7 @@ public class MyDateRestConfig implements RepositoryRestConfigurer {
         exposeIds(config);
 
         // configure cors mapping
-        cors.addMapping("/api/**").allowedOrigins("http://localhost:4200");
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedOrigins);
     }
 
     private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
