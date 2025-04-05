@@ -1,9 +1,6 @@
 package com.jane.ecommerce.config;
 
-import com.jane.ecommerce.entity.Country;
-import com.jane.ecommerce.entity.Product;
-import com.jane.ecommerce.entity.ProductCategory;
-import com.jane.ecommerce.entity.State;
+import com.jane.ecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 
 import jakarta.persistence.metamodel.EntityType;
@@ -42,6 +39,7 @@ public class MyDateRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
         disableHttpMethods(Country.class, config, theUnsupportedActions);
         disableHttpMethods(State.class, config, theUnsupportedActions);
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
 
         exposeIds(config);
 
